@@ -1,5 +1,6 @@
 package calculator_test
 
+//Tests for the calculator
 import (
 	"calculator"
 	"math"
