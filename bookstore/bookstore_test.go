@@ -24,10 +24,12 @@ func TestBuy(t *testing.T) {
 	}
 
 	leftInStockAfterBuy := 98
+
 	buyTheBooks, err := bookstore.Buy(b)
 	if err != nil {
 		t.Fatalf("Fatal Error!! %v", err)
 	}
+
 	booksBought := b.Copies - leftInStockAfterBuy
 
 	got := buyTheBooks.Copies
