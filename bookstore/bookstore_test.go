@@ -30,13 +30,14 @@ func TestBuy(t *testing.T) {
 		t.Fatalf("Fatal Error!! %v", err)
 	}
 
-	booksBought := b.Copies - leftInStockAfterBuy
+	copiesBought := buyTheBooks.Copies
 
-	got := buyTheBooks.Copies
+	stockDiff := b.Copies - leftInStockAfterBuy
 
-	if leftInStockAfterBuy != got {
-		t.Errorf("There should be %d books left in stock after buying %d books from a stock of %d books,  got %d",
-			leftInStockAfterBuy, booksBought, b.Copies, got)
+	if leftInStockAfterBuy != copiesBought {
+
+		t.Errorf("There should be %d books left in stock after buying %d books from a stock of %d books,  but got %d",
+			leftInStockAfterBuy, stockDiff, b.Copies, copiesBought)
 	}
 
 }
@@ -50,7 +51,6 @@ func TestBuyInvalid(t *testing.T) {
 	}
 	_, err := bookstore.Buy(b)
 	if err == nil {
-		t.Errorf("Expected non nill error, got %v", err)
+		t.Errorf("Expected non nill error, copiesBought %v", err)
 	}
-
 }
