@@ -23,21 +23,19 @@ func TestBuy(t *testing.T) {
 		Copies: 100,
 	}
 
-	leftInStockAfterBuy := 98
+	wantToBuyCopies := 2
+	wantLeftInStock := 98
 
 	buyTheBooks, err := bookstore.Buy(b)
 	if err != nil {
 		t.Fatalf("Fatal Error!! %v", err)
 	}
 
-	copiesBought := buyTheBooks.Copies
+	booksBought := b.Copies - buyTheBooks.Copies
+	gotLeftInStock := b.Copies - booksBought
 
-	stockDiff := b.Copies - leftInStockAfterBuy
-
-	if leftInStockAfterBuy != copiesBought {
-
-		t.Errorf("There should be %d books left in stock after buying %d books from a stock of %d books,  but got %d",
-			leftInStockAfterBuy, stockDiff, b.Copies, copiesBought)
+	if wantLeftInStock != gotLeftInStock {
+		t.Errorf("Want %d books left from a stock of %d books after buying %d books, but %d books were bought leaving %d books in stock.", wantLeftInStock, b.Copies, wantToBuyCopies, booksBought, gotLeftInStock)
 	}
 
 }
